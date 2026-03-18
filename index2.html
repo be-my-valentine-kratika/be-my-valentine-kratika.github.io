@@ -204,10 +204,32 @@ transition:0.3s;
 transform:scale(1.1);
 }
 
+/* Music Button */
+.musicBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+padding:10px 15px;
+border:none;
+border-radius:20px;
+background:#fff;
+color:#ff3b6f;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="musicBtn" onclick="toggleMusic()">🔊 Music</button>
 
 <div class="container">
 
@@ -257,7 +279,7 @@ I promise to love you more with every passing day... forever ♾️
 <script>
 
 /* Typing Effect */
-const text="Today is the birthday of the most beautiful.  not just beautiful, also most charming,cute,and lovely girl in my life.. ❤️";
+const text="Today is the birthday of the most beautiful, charming, cute and lovely girl in my life.. ❤️";
 let i=0;
 
 function typing(){
@@ -303,6 +325,17 @@ heart.style.top=50+"vh";
 heart.style.position="fixed";
 document.body.appendChild(heart);
 setTimeout(()=>heart.remove(),3000);
+}
+}
+
+/* 🎵 Music Control */
+const music = document.getElementById("bgMusic");
+
+function toggleMusic(){
+if(music.paused){
+music.play();
+} else {
+music.pause();
 }
 }
 
