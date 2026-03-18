@@ -1,75 +1,205 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Protected Link</title>
-  <style>
-    body {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-     align-items:center;
-      background: linear-gradient(135deg, #1e1e2f, #2b2b45);
-      font-family: Arial, sans-serif;
-      color: white;
-    }
+<meta charset="UTF-8">
+<title>Love Game ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+<style>
 
-    .box {
-      background: #00000066;
-      padding: 30px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+color:white;
+overflow:hidden;
+  font-family: 'Allura', cursive;
+}
 
-    input {
-      padding: 10px;
-      width: 200px;
-      margin-top: 10px;
-      border-radius: 5px;
-      border: none;
-      outline: none;
-    }
+/* glass container */
 
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      background: #4caf50;
-      color: white;
-      font-size: 16px;
-    }
+.container{
+backdrop-filter:blur(20px);
+background:rgba(255,255,255,0.1);
+padding:40px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 10px 40px rgba(0,0,0,0.4);
+}
 
-    p {
-      margin-top: 10px;
-      color: red;
-    }
-  </style>
+/* board */
+
+.board{
+display:grid;
+grid-template-columns:repeat(3,100px);
+gap:10px;
+margin-top:20px;
+}
+
+.cell{
+width:100px;
+height:100px;
+background:rgba(255,255,255,0.2);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:2rem;
+cursor:pointer;
+border-radius:15px;
+transition:0.3s;
+}
+
+.cell:hover{
+background:rgba(255,255,255,0.4);
+transform:scale(1.1);
+}
+
+/* message */
+
+#status{
+margin-top:20px;
+font-size:1.2rem;
+}
+
+/* button */
+
+button{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#ff4e50;
+color:white;
+cursor:pointer;
+}
+
+</style>
 </head>
+
 <body>
 
-  <div class="box">
-    <h2>Enter Password</h2>
-    <input type="password" id="password" placeholder="Password">
-    <br>
-    <button onclick="checkPassword()">Open Link</button>
-    <p id="error"></p>
-  </div>
+<div class="container">
 
-  <script>
-    function checkPassword() {
-      const correctPassword = "19032006";   // CHANGE THIS
-      const enteredPassword = document.getElementById("password").value;
+<h1>Tic Tac Toe</h1>
+<p>Win the game to unlock your surprise ❤️</p>
 
-      if (enteredPassword === correctPassword) {
-        window.location.href = "work.html";
-      } else {
-        document.getElementById("error").innerText = "Wrong password!";
-      }
-    }
-  </script>
+<div class="board" id="board"></div>
+
+<div id="status"></div>
+
+<button onclick="resetGame()">Restart</button>
+
+</div>
+
+<script>
+
+const board=document.getElementById("board");
+const statusText=document.getElementById("status");
+
+let cells=["","","","","","","","",""];
+let currentPlayer="X"; // user
+let gameActive=true;
+
+/* create board */
+
+for(let i=0;i<9;i++){
+let cell=document.createElement("div");
+cell.classList.add("cell");
+cell.setAttribute("data-index",i);
+cell.addEventListener("click",handleClick);
+board.appendChild(cell);
+}
+
+/* handle click */
+
+function handleClick(e){
+
+let index=e.target.getAttribute("data-index");
+
+if(cells[index]!=="" || !gameActive) return;
+
+cells[index]="X";
+e.target.innerHTML="❌";
+
+checkResult();
+
+if(gameActive){
+setTimeout(aiMove,500);
+}
+
+}
+
+/* AI move (simple random) */
+
+function aiMove(){
+
+let empty=cells.map((v,i)=>v===""?i:null).filter(v=>v!==null);
+
+let randomIndex=empty[Math.floor(Math.random()*empty.length)];
+
+cells[randomIndex]="O";
+document.querySelectorAll(".cell")[randomIndex].innerHTML="⭕";
+
+checkResult();
+
+}
+
+/* check result */
+
+function checkResult(){
+
+const winPatterns=[
+[0,1,2],[3,4,5],[6,7,8],
+[0,3,6],[1,4,7],[2,5,8],
+[0,4,8],[2,4,6]
+];
+
+for(let pattern of winPatterns){
+
+let [a,b,c]=pattern;
+
+if(cells[a] && cells[a]===cells[b] && cells[a]===cells[c]){
+
+gameActive=false;
+
+if(cells[a]==="X"){
+statusText.innerHTML="You win ❤️ surprise Unlocked ...";
+setTimeout(()=>{
+window.location.href="option1.html";
+},1500);
+}
+else{
+statusText.innerHTML="I win 😏 Try again my love";
+}
+
+return;
+}
+}
+
+/* draw */
+
+if(!cells.includes("")){
+gameActive=false;
+statusText.innerHTML="It's a draw 😅 Try again";
+}
+
+}
+
+/* reset */
+
+function resetGame(){
+cells=["","","","","","","","",""];
+gameActive=true;
+statusText.innerHTML="";
+document.querySelectorAll(".cell").forEach(cell=>{
+cell.innerHTML="";
+});
+}
+
+</script>
 
 </body>
 </html>
