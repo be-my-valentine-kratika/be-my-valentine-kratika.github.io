@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday My Love ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+<style>
+
+/* Background Animation */
+body{
+margin:0;
+height:100vh;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#ff4e50,#f9d423,#ff6a88,#ff99ac);
+background-size:400% 400%;
+animation:gradientMove 12s infinite;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+color:white;
+  font-family: 'Sacramento', cursive;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* Glass Container */
+.container{
+backdrop-filter:blur(15px);
+background:rgba(255,255,255,0.1);
+border-radius:25px;
+padding:40px;
+width:80%;
+text-align:center;
+box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* Title */
+h1{
+font-size:3rem;
+margin-bottom:10px;
+}
+
+/* Typing text */
+#typing{
+font-size:1.4rem;
+min-height:40px;
+}
+
+/* Image gallery */
+.gallery{
+display:flex;
+justify-content:center;
+gap:30px;
+margin-top:40px;
+flex-wrap:wrap;
+}
+
+.card{
+position:relative;
+width:220px;
+height:220px;
+border-radius:20px;
+overflow:hidden;
+cursor:pointer;
+transition:0.6s;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.card img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:0.6s;
+}
+
+/* Hover effect */
+.card:hover img{
+transform:scale(1.2);
+filter:blur(2px) brightness(60%);
+}
+
+/* Hidden message */
+.message{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+opacity:0;
+font-size:1.3rem;
+text-align:center;
+transition:0.6s;
+padding:15px;
+}
+
+.card:hover .message{
+opacity:1;
+}
+
+/* Floating hearts */
+.heart{
+position:absolute;
+color:#ff3b6f;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh) scale(0);}
+100%{transform:translateY(-10vh) scale(1.5);}
+}
+
+/* Button */
+.loveBtn{
+margin-top:30px;
+padding:12px 25px;
+font-size:1.2rem;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff3b6f,#ff758c);
+color:white;
+cursor:pointer;
+transition:0.4s;
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+.loveBtn:hover{
+transform:scale(1.1);
+box-shadow:0 8px 25px rgba(0,0,0,0.5);
+}
+
+/* Love Page */
+.lovePage{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:radial-gradient(circle,#ff4e50,#1a001f);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+opacity:0;
+pointer-events:none;
+transition:1s;
+padding:20px;
+}
+
+/* Active Page */
+.lovePage.active{
+opacity:1;
+pointer-events:auto;
+}
+
+/* Title Glow */
+.loveTitle{
+font-size:4rem;
+animation:glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow{
+from{
+text-shadow:0 0 10px #ff4e50,0 0 20px #ff6a88;
+}
+to{
+text-shadow:0 0 20px #fff,0 0 40px #ff3b6f;
+}
+}
+
+/* Love Text */
+.loveText{
+font-size:1.4rem;
+max-width:600px;
+margin-top:20px;
+line-height:1.8;
+animation:fadeIn 3s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(30px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* Back Button */
+.backBtn{
+margin-top:30px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#fff;
+color:#ff3b6f;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.backBtn:hover{
+transform:scale(1.1);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>❤️ Happy Birthday My Love ❤️</h1>
+
+<div id="typing"></div>
+
+<div class="gallery">
+
+<div class="card">
+<img src="image1.jpg">
+<div class="message">You make my world beautiful.. ❤️</div>
+</div>
+
+<div class="card">
+<img src="image3.jpg">
+<div class="message">Can't even imagine a single moment without you.. ✨</div>
+</div>
+
+<div class="card">
+<img src="image2.jpg">
+<div class="message">Forever grateful to have you in my life ..💖</div>
+</div>
+
+</div>
+
+<button class="loveBtn" onclick="openLovePage()">Open My Heart ❤️</button>
+
+</div>
+
+<!-- LOVE PAGE -->
+<div id="lovePage" class="lovePage">
+
+<h1 class="loveTitle">I LOVE YOU KRATIKA❤️</h1>
+
+<p class="loveText">
+You are not just my love... you are my peace, my happiness, my everything 💖<br><br>
+Every heartbeat of mine whispers your name ❤️<br>
+Every moment with you feels like a dream I never want to wake up from ✨<br><br>
+I promise to love you more with every passing day... forever ♾️
+</p>
+
+<button class="backBtn" onclick="closeLovePage()">Back 💕</button>
+
+</div>
+
+<script>
+
+/* Typing Effect */
+const text="Today is the birthday of the most beautiful.  not just beautiful, also most charming,cute,and lovely girl in my life.. ❤️";
+let i=0;
+
+function typing(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typing,50);
+}
+}
+typing();
+
+/* Floating Hearts */
+function createHeart(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},6000)
+}
+setInterval(createHeart,300);
+
+/* Open Love Page */
+function openLovePage(){
+document.getElementById("lovePage").classList.add("active");
+burstHearts();
+}
+
+/* Close Love Page */
+function closeLovePage(){
+document.getElementById("lovePage").classList.remove("active");
+}
+
+/* Heart Burst */
+function burstHearts(){
+for(let i=0;i<25;i++){
+let heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=50+"vw";
+heart.style.top=50+"vh";
+heart.style.position="fixed";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),3000);
+}
+}
+
+</script>
+
+</body>
+</html>
